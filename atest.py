@@ -2,6 +2,10 @@ from trader import Trader
 
 trader = Trader()
 
-ticks = trader.get_ticks(1.64)
+print(trader.get_ticks(1.15))
+print(trader.get_ticks(4.3))
 
-print(ticks)
+
+price = trader.increment_price(1.15, 158)
+
+print("new price: ", price)

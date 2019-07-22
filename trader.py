@@ -26,6 +26,26 @@ class Trader:
 
     return round(ticks)
 
+  def increment_price(self, price, ticks):
+    price_ticks = self.get_ticks(price)
+    target_ticks = price_ticks + ticks
+   # print(price_ticks, target_ticks)
+    index = -1
+    for i in range(8):
+      if( Trader.ticks_lookup[i][2] > target_ticks):
+        index = (i - 1)
+        break
+    if index == -1:
+      return(price + (ticks * 0.01))
+    #print(index)
+    remaining_ticks = target_ticks - Trader.ticks_lookup[index][2]
+    #print(remaining_ticks)
+    price_increment = remaining_ticks * Trader.ticks_lookup[index][3]
+    #print(price_increment)
+    target_price =  Trader.ticks_lookup[index][0] + price_increment
+    return(target_price)
+
+
 
   def is_trading_opportunity(self, back_price, lay_price, ticks):
     back_ticks = self.get_ticks(back_price)
